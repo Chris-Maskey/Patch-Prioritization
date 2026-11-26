@@ -1,0 +1,35 @@
+{
+  "file": "pool.csv",
+  "sha256": "6ad992731665916efdc4e241803999fa3bdc317a534a68e5faf65e217020675f",
+  "rows": 4436,
+  "kev_status": {
+    "match": 17,
+    "no_cve": 113,
+    "no_match": 4306
+  },
+  "zero_value_rows": 9,
+  "value_min": 0,
+  "value_max": 100,
+  "kev_catalog_version": "2026.11.03",
+  "cvss_library": "cvss==3.6",
+  "sources": {
+    "pypi.zip": {
+      "url": "https://storage.googleapis.com/osv-vulnerabilities/PyPI/all.zip",
+      "bytes": 37625305,
+      "sha256": "b179be8b3134f93114cdc2696b58be0b535beecbf494ee6998b084bb87761457"
+    },
+    "kev.json": {
+      "url": "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json",
+      "bytes": 1828704,
+      "sha256": "0e7e91681f2207c7920a338f0d2b14c67933473ecf9550153627efaaba8d2e4c"
+    }
+  },
+  "rules": [
+    "Exclude withdrawn OSV records.",
+    "Merge records transitively through IDs and aliases.",
+    "A record is eligible with a valid CVSS 3.1 vector and a fixed-version event.",
+    "Keep groups whose eligible records share one base score; value = score x 10.",
+    "group_id is the smallest OSV record ID in the group.",
+    "kev_status: match (a CVE alias is in KEV), no_match (CVEs present, none in KEV), no_cve (no CVE identifier, so KEV membership cannot be checked)."
+  ]
+}

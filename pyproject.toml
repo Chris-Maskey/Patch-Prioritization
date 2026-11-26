@@ -1,0 +1,10 @@
+[project]
+name = "patchsel"
+version = "0.1.0"
+description = "CP600 Group 4: budget-constrained vulnerability patch selection experiments"
+requires-python = ">=3.11"
+dependencies = [
+    "cvss==3.6",
+    "matplotlib==3.10.*",
+    "scipy==1.16.*",
+]

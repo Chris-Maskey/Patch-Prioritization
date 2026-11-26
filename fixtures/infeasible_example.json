@@ -1,0 +1,38 @@
+{
+ "schema": "cp600.instance/v1",
+ "instance_id": "infeasible-example",
+ "total_budget": 3,
+ "meta": {
+  "note": "Mandatory cost 4 exceeds W=3: every method must report infeasible with shortfall 1."
+ },
+ "task_fields": [
+  "task_id",
+  "value",
+  "cost",
+  "mandatory",
+  "kev_status"
+ ],
+ "tasks": [
+  [
+   "M1",
+   98,
+   2,
+   true,
+   "match"
+  ],
+  [
+   "M2",
+   75,
+   2,
+   true,
+   "match"
+  ],
+  [
+   "A",
+   50,
+   1,
+   false,
+   "no_cve"
+  ]
+ ]
+}

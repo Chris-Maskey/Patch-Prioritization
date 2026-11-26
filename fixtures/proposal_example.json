@@ -1,0 +1,49 @@
+{
+ "schema": "cp600.instance/v1",
+ "instance_id": "proposal-example",
+ "total_budget": 8,
+ "meta": {
+  "note": "Proposal section 1 example. Costs in hours here; values in score tenths (9 points = 90). M's value is illustrative.",
+  "expected_optional_score": {
+   "severity": 90,
+   "ratio": 160
+  }
+ },
+ "task_fields": [
+  "task_id",
+  "value",
+  "cost",
+  "mandatory",
+  "kev_status"
+ ],
+ "tasks": [
+  [
+   "M",
+   75,
+   2,
+   true,
+   "match"
+  ],
+  [
+   "A",
+   90,
+   4,
+   false,
+   "no_match"
+  ],
+  [
+   "B",
+   80,
+   3,
+   false,
+   "no_match"
+  ],
+  [
+   "C",
+   80,
+   3,
+   false,
+   "no_match"
+  ]
+ ]
+}
