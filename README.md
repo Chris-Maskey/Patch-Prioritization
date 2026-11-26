@@ -2,7 +2,7 @@
 
 Python command-line experiment that compares five methods for choosing vulnerability patches under a fixed effort budget. KEV-matched tasks are mandatory. Their cost is reserved first. The methods select optional tasks with the remaining budget.
 
-Status: complete. The final report is `report/report.tex`; its numbers and figures come from `results/`.
+Status: complete. This repository holds the code and the prepared dataset for the Group 4 final report. The raw source snapshots and the benchmark instances are in the v1.0 release.
 
 | Method | `--method` | Result |
 | --- | --- | --- |
@@ -18,16 +18,15 @@ Status: complete. The final report is `report/report.tex`; its numbers and figur
 **Code.** Clone this repository:
 
 ```sh
-git clone <CODE-REPOSITORY-URL>              # TODO: add the code link
-cd <repository-folder>
+git clone https://github.com/Chris-Maskey/Patch-Prioritization.git
+cd Patch-Prioritization
 ```
 
-**Dataset.** The prepared evaluation pool (`data/prepared/pool.csv`, 4,436 vulnerability groups, with `pool_meta.json`) is in the repository. The larger files are in one archive, `cp600-dataset-v1.0.zip`, at <DATASET-URL> (TODO: add the dataset link). Unzip it in the repository root:
+**Dataset.** The prepared evaluation pool (`data/prepared/pool.csv`, 4,436 vulnerability groups, with `pool_meta.json`) is in the repository. The larger files are in one archive, `cp600-dataset-v1.0.zip`, on the [v1.0 release](https://github.com/Chris-Maskey/Patch-Prioritization/releases/tag/v1.0). Unzip it in the repository root:
 
 ```sh
-curl -LO <DATASET-URL>/cp600-dataset-v1.0.zip  # TODO: add the dataset link
-unzip cp600-dataset-v1.0.zip                 # adds data/raw/, data/instances/, results/main/benchmark.jsonl.gz
-gunzip results/main/benchmark.jsonl.gz
+curl -LO https://github.com/Chris-Maskey/Patch-Prioritization/releases/download/v1.0/cp600-dataset-v1.0.zip
+unzip cp600-dataset-v1.0.zip                 # adds data/raw/ and data/instances/
 ```
 
 | Path | Content | Where | Needed for |
@@ -35,7 +34,6 @@ gunzip results/main/benchmark.jsonl.gz
 | `data/prepared/pool.csv`, `pool_meta.json` | Evaluation pool and its hashes | Repository | `generate`, `bench`, `compare` |
 | `data/raw/pypi.zip`, `data/raw/kev.json` | OSV PyPI snapshot and CISA KEV catalogue 2026.11.03 | Release | `prepare` and `check_data.py` (they check the SHA-256 hashes in `pool_meta.json`) |
 | `data/instances/` | The 351 benchmark instances as JSON | Release | Optional: `bench` regenerates them from the pool |
-| `results/main/benchmark.jsonl` | The 5,438 raw benchmark rows | Release (gzipped) | `analyze` on the main benchmark |
 
 The tests, `solve`, `generate`, `bench`, and `compare` work from the repository alone. The live OSV download changes every day, so use the snapshots in the release to rebuild the pool.
 
@@ -53,7 +51,7 @@ uv run python -m patchsel solve data/instances/N0500-uniform-b30-s0.json --time-
 uv run python -m patchsel solve fixtures/proposal_example.json --show-ids
 uv run python -m unittest                 # test suite (about 1 second)
 uv run python -m patchsel bench --sizes 100 --seeds 0 --out results/pilot/small.jsonl
-uv run python -m patchsel analyze results/main/benchmark.jsonl --units results/units/units.jsonl --out results/figures
+uv run python -m patchsel analyze results/main/benchmark.jsonl --units results/units/units.jsonl --out results/figures   # after the two runs below
 uv run python -m patchsel compare --out results/compare   # prior-work comparisons, about 2 minutes
 ```
 
@@ -160,6 +158,5 @@ Use `patchsel/solvers/greedy.py` as the model for a new method. Register the met
 | `patchsel/runner.py` | Benchmark runner and worker process |
 | `patchsel/analyze.py` | Summary tables, paired win/tie/loss counts, and report figures |
 | `patchsel/compare.py` | Repeats of Goohs et al. (WEIS 2022) and Jacobs et al. (2020), scores only |
-| `report/report.tex` | Final report (LaTeX; figures from `results/figures`) |
 | `fixtures/` | Hand-calculated proposal example and an infeasible case |
-| `results/` | Benchmark output (JSON lines, environment, logs) |
+| `results/` | Created by `bench`, `analyze`, and `compare` (not in the repository) |
